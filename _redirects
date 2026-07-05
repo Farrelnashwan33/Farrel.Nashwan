@@ -1,3 +1,0 @@
-# Redirects
-# This ensures that standard routing works if it isn't completely static.
-/* /index.html 200
