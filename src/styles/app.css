@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-background: #030712;
+  --color-surface: #111827;
+  --color-card: #1F2937;
+  --color-primary: #3B82F6;
+  --color-secondary: #06B6D4;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-text-main: #F8FAFC;
+  --color-text-desc: #94A3B8;
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-card);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500;
+  }
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  .card-premium {
+    @apply bg-surface/80 backdrop-blur-sm border border-white/5 rounded-[24px] shadow-[0_4px_24px_-8px_rgba(0,0,0,0.5)] transition-all duration-300;
+    transform: translateZ(0); /* Hardware acceleration */
+  }
+  .card-premium:hover {
+    @apply border-white/10 shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)];
+    transform: translateZ(0) translateY(-4px);
+  }
+  /* Layout utilities */
+  .section-padding {
+    @apply py-[60px] md:py-[80px] lg:py-[120px];
+  }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+
+/* Initial hidden state for intersection observer */
+.reveal-on-scroll {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  transform: translate3d(0, 40px, 0) rotate(2deg);
+}
+
+.reveal-left {
+  transform: translate3d(-40px, 0, 0);
+}
+
+.reveal-right {
+  transform: translate3d(40px, 0, 0);
+}
+
+.reveal-scale {
+  transform: scale(0.9) translate3d(0, 20px, 0);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+}
